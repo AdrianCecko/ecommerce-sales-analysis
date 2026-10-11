@@ -1,0 +1,16 @@
+# Sekrety
+.env
+.env.*
+!.env.example
+
+# Python
+.venv/
+venv/
+__pycache__/
+*.pyc
+
+# PyCharm
+.idea/
+
+# Lokalne pliki robocze
+.DS_Store
