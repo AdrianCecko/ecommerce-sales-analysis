@@ -1,30 +1,69 @@
 # E-commerce Sales Analysis
 
-A beginner data analytics project using **Python, PostgreSQL, Pandas, and Matplotlib**.
+A beginner-friendly data analytics project built with **Python, PostgreSQL, Pandas, and Matplotlib**.
 
-The project demonstrates how to connect Python to a PostgreSQL database, retrieve sales data using SQL, process it with Pandas, and visualize monthly revenue.
+The project demonstrates how to retrieve data from a relational database, process it using Pandas, calculate monthly sales revenue, and visualize the results.
 
-## Technologies Used
+## Tech Stack
 
-- **Python** – data processing and analysis
-- **PostgreSQL** – relational database for storing sales data
-- **SQLAlchemy & Psycopg** – database connectivity
+- **PostgreSQL** – relational database
+- **SQL** – data retrieval and database structure
+- **Python** – analysis workflow
 - **Pandas** – data manipulation and aggregation
 - **Matplotlib** – data visualization
-- **python-dotenv** – environment variable management
+- **SQLAlchemy & Psycopg** – PostgreSQL connection
+- **python-dotenv** – environment configuration
 
-## Project Workflow
+## Project Structure
 
-1. Connect to a local PostgreSQL database using SQLAlchemy.
-2. Retrieve order data with a SQL query (`SELECT * FROM orders`).
-3. Load the results into a Pandas DataFrame.
-4. Convert the `order_date` column to a datetime format.
-5. Group orders by month and calculate total monthly revenue.
-6. Generate a bar chart showing monthly sales revenue.
+```text
+ecommerce-sales-analysis/
+├── database/
+│   └── setup.sql
+├── images/
+│   └── monthly_revenue.png
+├── main.py
+├── requirements.txt
+├── .gitignore
+└── README.md
+```
 
-## Sample Analysis Results
+## Dataset
 
-Based on the sample dataset:
+The project uses a fictional e-commerce dataset consisting of two tables.
+
+**customers**
+
+| Column | Description |
+|---|---|
+| customer_id | Unique customer identifier |
+| name | Customer name |
+| city | Customer location |
+
+**orders**
+
+| Column | Description |
+|---|---|
+| order_id | Unique order identifier |
+| customer_id | Customer identifier (foreign key) |
+| order_date | Date of purchase |
+| amount | Order value in PLN |
+
+The sample database contains 5 customers and 8 orders across January–March 2025.
+
+The database setup script is available in `database/setup.sql`.
+
+## Analysis Workflow
+
+1. Connect Python to PostgreSQL using SQLAlchemy and Psycopg.
+2. Retrieve records from the `orders` table using SQL.
+3. Load the query results into a Pandas DataFrame.
+4. Convert the `order_date` column into a datetime format.
+5. Group orders by month using `groupby()`.
+6. Calculate monthly revenue using `sum()`.
+7. Generate a bar chart with Matplotlib.
+
+## Results
 
 | Month | Total Revenue (PLN) |
 |---|---:|
@@ -32,36 +71,42 @@ Based on the sample dataset:
 | February 2025 | 1,050 |
 | March 2025 | 750 |
 
-February generated the highest revenue in the sample dataset.
+February had the highest revenue in this sample, while March revenue was lower than February.
 
-These results are based on fictional data and are intended for educational purposes.
+### Monthly Revenue Visualization
+
+![Monthly Revenue](images/monthly_revenue.png)
 
 ## How to Run
 
-**1. Clone the repository**
+### 1. Clone the repository
 
 ```bash
 git clone https://github.com/AdrianCecko/ecommerce-sales-analysis.git
+cd ecommerce-sales-analysis
 ```
 
-**2. Install dependencies**
+### 2. Install dependencies
 
 ```bash
-pip install -r requirements.txt
+python -m pip install -r requirements.txt
 ```
 
-**3. Configure PostgreSQL**
+### 3. Prepare the PostgreSQL database
 
-Create a PostgreSQL database named `sales_analysis` with an `orders` table containing:
+Create a PostgreSQL database named `sales_analysis`.
 
-- `order_id`
-- `customer_id`
-- `order_date`
-- `amount`
+Execute the following file in that database using Navicat or another SQL client:
 
-Populate the table with sample sales records.
+```text
+database/setup.sql
+```
 
-**4. Create a `.env` file**
+This creates the `customers` and `orders` tables and inserts sample data.
+
+### 4. Configure environment variables
+
+Create a `.env` file in the project root:
 
 ```dotenv
 DB_USER=postgres
@@ -71,22 +116,26 @@ DB_PORT=5433
 DB_NAME=sales_analysis
 ```
 
-**5. Run the analysis**
+The `.env` file is excluded from Git using `.gitignore`.
+
+### 5. Run the analysis
 
 ```bash
 python main.py
 ```
 
-The application will retrieve sales records, calculate monthly revenue, and display a bar chart.
+The script retrieves order data from PostgreSQL, calculates monthly revenue, and displays a chart.
 
 ## Future Improvements
 
-- Customer segmentation and revenue analysis
-- Data cleaning and validation
-- Additional sales KPIs
-- Interactive dashboards using Power BI
-- Analysis of larger datasets
+- Customer revenue analysis and segmentation
+- Identifying returning customers
+- Data quality checks and missing-value handling
+- Additional business KPIs
+- Power BI dashboard integration
 
 ## Project Status
 
-**Work in progress** – developed as a hands-on learning project to strengthen SQL, Python, and data analytics skills.
+**In progress**
+
+This project is part of my practical learning journey in SQL, Python, and data analytics.
