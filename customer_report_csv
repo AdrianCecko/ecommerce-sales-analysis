@@ -1,0 +1,6 @@
+customer_id,name,total_spent,total_count
+3,Ola,1000.0,2
+1,Anna,750.0,3
+2,Piotr,600.0,2
+4,Marek,100.0,1
+5,Ewa,0.0,0
