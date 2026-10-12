@@ -5,6 +5,14 @@ from sqlalchemy import create_engine, URL
 import matplotlib.pyplot as plt
 from dotenv import load_dotenv
 
+def classify_customer(order_count):
+
+    if order_count > 1:
+        return "returning"
+    elif order_count == 1:
+        return "one time"
+    else:
+        return "inactive"
 load_dotenv()
 db_url = URL.create(
     drivername="postgresql+psycopg",
@@ -41,6 +49,10 @@ print(revenue["total_spent"].sum())
 print("total count:")
 print(revenue["total_count"].sum())
 revenue.to_csv("customer_report_csv", index=False)
+
+revenue["customer_type"] = revenue["total_count"].apply(classify_customer)
+
+print(revenue)
 
 
 
